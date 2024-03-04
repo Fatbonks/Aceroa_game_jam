@@ -3,7 +3,7 @@ extends CharacterBody3D
 @onready var camera_3d:Camera3D = %Camera3D
 @onready var head:Node3D = %head
 
-@export var mouse_sen: float = 0.005
+@export var mouse_sen: float = 0.5
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
@@ -13,9 +13,9 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
-func _unhandled_input(event):
+func _input(event):
 	if event is InputEventMouseMotion:
-		rotate_y(-event.relative.x * mouse_sen)
+		rotate_y(deg_to_rad(-event.relative.x * mouse_sen))
 		head.rotate_x(deg_to_rad(-event.relative.y * mouse_sen))
 		head.rotation.x = clamp(head.rotation.x, deg_to_rad(-89), deg_to_rad(89))
 
