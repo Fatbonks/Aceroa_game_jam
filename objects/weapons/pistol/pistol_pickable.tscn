@@ -1,0 +1,30 @@
+[gd_scene load_steps=7 format=3 uid="uid://b0csltiosye1"]
+
+[ext_resource type="PackedScene" uid="uid://cjhqljaxsjqo3" path="res://components/component_pickable/object_pickable.tscn" id="1_rcxqd"]
+[ext_resource type="PackedScene" uid="uid://cf0le7y1u7cm1" path="res://objects/weapons/pistol/weapon_pistol.tscn" id="2_5su8g"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dmbv5"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lvlag"]
+material = SubResource("StandardMaterial3D_dmbv5")
+size = Vector3(0.2, 0.2, 0.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_04twl"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_g8oq2"]
+
+[node name="pistol_pickable" type="RigidBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_lvlag")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_04twl")
+
+[node name="object_pickable" parent="." instance=ExtResource("1_rcxqd")]
+entity_type = "Weapon"
+object = ExtResource("2_5su8g")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="object_pickable"]
+shape = SubResource("SphereShape3D_g8oq2")
