@@ -2,11 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://bporylsvgit1b" path="res://components/weapon_systems/pistol_system.tscn" id="1_5ilhw"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ioc0u"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s0yfd"]
 albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_s3io3"]
-material = SubResource("StandardMaterial3D_ioc0u")
+material = SubResource("StandardMaterial3D_s0yfd")
 size = Vector3(0.2, 0.2, 0.8)
 
 [node name="weapon_pistol" type="Node3D"]

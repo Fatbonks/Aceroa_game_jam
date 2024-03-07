@@ -1,25 +1,26 @@
-[gd_scene load_steps=7 format=3 uid="uid://b0csltiosye1"]
+[gd_scene load_steps=9 format=3 uid="uid://b0csltiosye1"]
 
+[ext_resource type="Script" path="res://objects/weapons/pistol/pistol_pickable.gd" id="1_gqakp"]
 [ext_resource type="PackedScene" uid="uid://cjhqljaxsjqo3" path="res://components/component_pickable/object_pickable.tscn" id="1_rcxqd"]
 [ext_resource type="PackedScene" uid="uid://cf0le7y1u7cm1" path="res://objects/weapons/pistol/weapon_pistol.tscn" id="2_5su8g"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dmbv5"]
-albedo_color = Color(1, 0, 0, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_lvlag"]
-material = SubResource("StandardMaterial3D_dmbv5")
-size = Vector3(0.2, 0.2, 0.8)
+[ext_resource type="PackedScene" uid="uid://bporylsvgit1b" path="res://components/weapon_systems/pistol_system.tscn" id="4_0ulye"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_04twl"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_g8oq2"]
 
-[node name="pistol_pickable" type="RigidBody3D"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ioc0u"]
+albedo_color = Color(1, 0, 0, 1)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_lvlag")
+[sub_resource type="BoxMesh" id="BoxMesh_sw7vh"]
+material = SubResource("StandardMaterial3D_ioc0u")
+size = Vector3(0.2, 0.2, 0.8)
+
+[node name="pistol_pickable" type="RigidBody3D"]
+script = ExtResource("1_gqakp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+unique_name_in_owner = true
 shape = SubResource("BoxShape3D_04twl")
 
 [node name="object_pickable" parent="." instance=ExtResource("1_rcxqd")]
@@ -28,3 +29,11 @@ object = ExtResource("2_5su8g")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="object_pickable"]
 shape = SubResource("SphereShape3D_g8oq2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_sw7vh")
+
+[node name="pistol_system" parent="." instance=ExtResource("4_0ulye")]
+
+[connection signal="sleep_object" from="object_pickable" to="." method="set_to_sleep"]
+[connection signal="throw_weapon" from="pistol_system" to="." method="set_to_awake"]
