@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cypy57ybc34vp"]
+
+[ext_resource type="Script" path="res://components/item_system/item_system.gd" id="1_4scr2"]
+
+[node name="item_system" type="Node"]
+script = ExtResource("1_4scr2")

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bporylsvgit1b"]
+
+[ext_resource type="Script" path="res://components/component_throw/throw_system.gd" id="1_ih634"]
+
+[node name="throw_system" type="Node"]
+script = ExtResource("1_ih634")

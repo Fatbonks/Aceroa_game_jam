@@ -1,7 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://dcftoaqtej0du"]
+[gd_scene load_steps=13 format=3 uid="uid://dcftoaqtej0du"]
 
 [ext_resource type="Shader" path="res://objects/Orbs/heath_orb/heath_orb.gdshader" id="1_cktx2"]
 [ext_resource type="Script" path="res://objects/Orbs/heath_orb/heath_orb.gd" id="1_taneq"]
+[ext_resource type="PackedScene" uid="uid://cjhqljaxsjqo3" path="res://components/component_pickable/object_pickable.tscn" id="3_3e0rx"]
+[ext_resource type="PackedScene" uid="uid://bporylsvgit1b" path="res://components/component_throw/throw_system.tscn" id="4_jatsd"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_klivc"]
+radius = 0.15
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gnojp"]
 render_priority = 0
@@ -54,17 +59,18 @@ _data = {
 "rotate_orb": SubResource("Animation_jch7f")
 }
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5g1du"]
-albedo_color = Color(1, 0, 0, 1)
+[sub_resource type="SphereShape3D" id="SphereShape3D_38xdo"]
+radius = 0.3
 
-[sub_resource type="QuadMesh" id="QuadMesh_gyflr"]
-material = SubResource("StandardMaterial3D_5g1du")
-
-[node name="heath_orb" type="Node3D"]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+[node name="heath_orb" type="RigidBody3D"]
 script = ExtResource("1_taneq")
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+unique_name_in_owner = true
+shape = SubResource("SphereShape3D_klivc")
+
 [node name="Orb" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 mesh = SubResource("SphereMesh_v4cng")
 
 [node name="SubViewport" type="SubViewport" parent="."]
@@ -84,7 +90,7 @@ offset_bottom = 23.0
 text = "Health"
 
 [node name="pivot" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0263398, 0)
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, -0.0263398, 0)
 
 [node name="Sprite3D" type="Sprite3D" parent="pivot"]
 transform = Transform3D(0.891007, 0, 0.453991, 0, 1, 0, -0.453991, 0, 0.891007, 0.0611534, -0.124555, 0.561215)
@@ -96,6 +102,14 @@ libraries = {
 }
 autoplay = "rotate_orb"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-visible = false
-mesh = SubResource("QuadMesh_gyflr")
+[node name="object_pickable" parent="." instance=ExtResource("3_3e0rx")]
+entity_type = "Item"
+
+[node name="object_shape" type="CollisionShape3D" parent="object_pickable"]
+shape = SubResource("SphereShape3D_38xdo")
+
+[node name="throw_system" parent="." instance=ExtResource("4_jatsd")]
+
+[connection signal="is_in_player_hands" from="object_pickable" to="throw_system" method="is_active"]
+[connection signal="sleep_object" from="object_pickable" to="." method="set_to_sleep"]
+[connection signal="throw_weapon" from="throw_system" to="." method="set_to_awake"]

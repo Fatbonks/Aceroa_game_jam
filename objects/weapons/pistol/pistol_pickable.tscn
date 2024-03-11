@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://objects/weapons/pistol/pistol_pickable.gd" id="1_gqakp"]
 [ext_resource type="PackedScene" uid="uid://cjhqljaxsjqo3" path="res://components/component_pickable/object_pickable.tscn" id="1_rcxqd"]
-[ext_resource type="PackedScene" uid="uid://cf0le7y1u7cm1" path="res://objects/weapons/pistol/weapon_pistol.tscn" id="2_5su8g"]
-[ext_resource type="PackedScene" uid="uid://bporylsvgit1b" path="res://components/weapon_systems/pistol_system.tscn" id="4_0ulye"]
+[ext_resource type="PackedScene" uid="uid://bporylsvgit1b" path="res://components/component_throw/throw_system.tscn" id="4_0ulye"]
+[ext_resource type="PackedScene" uid="uid://y3ehe1x4wppv" path="res://components/weapon_systems/hitscan_weapon_system.tscn" id="4_ftnaf"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_04twl"]
 
@@ -25,7 +25,6 @@ shape = SubResource("BoxShape3D_04twl")
 
 [node name="object_pickable" parent="." instance=ExtResource("1_rcxqd")]
 entity_type = "Weapon"
-object = ExtResource("2_5su8g")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="object_pickable"]
 shape = SubResource("SphereShape3D_g8oq2")
@@ -33,7 +32,11 @@ shape = SubResource("SphereShape3D_g8oq2")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_sw7vh")
 
-[node name="pistol_system" parent="." instance=ExtResource("4_0ulye")]
+[node name="throw_system" parent="." instance=ExtResource("4_0ulye")]
 
+[node name="Hitscan_weapon_system" parent="." instance=ExtResource("4_ftnaf")]
+
+[connection signal="is_in_player_hands" from="object_pickable" to="throw_system" method="is_active"]
 [connection signal="sleep_object" from="object_pickable" to="." method="set_to_sleep"]
-[connection signal="throw_weapon" from="pistol_system" to="." method="set_to_awake"]
+[connection signal="stop_rigid" from="throw_system" to="." method="set_to_sleep"]
+[connection signal="throw_weapon" from="throw_system" to="." method="set_to_awake"]

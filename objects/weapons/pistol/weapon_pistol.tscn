@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cf0le7y1u7cm1"]
 
-[ext_resource type="PackedScene" uid="uid://bporylsvgit1b" path="res://components/weapon_systems/pistol_system.tscn" id="1_5ilhw"]
+[ext_resource type="PackedScene" uid="uid://bporylsvgit1b" path="res://components/component_throw/throw_system.tscn" id="1_5ilhw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s0yfd"]
 albedo_color = Color(1, 0, 0, 1)

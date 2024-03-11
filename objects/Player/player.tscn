@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://clrq3vypsa8cm"]
+[gd_scene load_steps=7 format=3 uid="uid://clrq3vypsa8cm"]
 
 [ext_resource type="Script" path="res://objects/Player/player.gd" id="1_o4xc8"]
-[ext_resource type="PackedScene" uid="uid://dcftoaqtej0du" path="res://objects/Orbs/heath_orb/heath_orb.tscn" id="2_iwq1k"]
+[ext_resource type="Script" path="res://objects/Player/weapon_holder.gd" id="2_hrs3o"]
+[ext_resource type="Script" path="res://objects/Player/item_holder.gd" id="2_lf1n4"]
 [ext_resource type="Script" path="res://objects/Player/object_pickable_detector.gd" id="2_vriqo"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cb7qt"]
@@ -26,13 +27,13 @@ unique_name_in_owner = true
 
 [node name="weapon_holder" type="Node3D" parent="head/Camera3D"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.358251, -0.353186, -0.682491)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.571149, -0.353186, -0.648892)
+script = ExtResource("2_hrs3o")
 
 [node name="item_holder" type="Node3D" parent="head/Camera3D"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.358, -0.353, -0.682)
-
-[node name="heath_orb" parent="head/Camera3D/item_holder" instance=ExtResource("2_iwq1k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.610825, -0.353, -0.682)
+script = ExtResource("2_lf1n4")
 
 [node name="object_pickable_detector" type="Node3D" parent="head/Camera3D"]
 script = ExtResource("2_vriqo")
