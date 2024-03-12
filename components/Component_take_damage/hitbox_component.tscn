@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpadrd44m3jo"]
+
+[ext_resource type="Script" path="res://components/Component_take_damage/hitbox_component.gd" id="1_sfgad"]
+
+[node name="hitbox_component" type="Area3D"]
+monitoring = false
+script = ExtResource("1_sfgad")

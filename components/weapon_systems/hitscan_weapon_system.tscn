@@ -1,6 +1,30 @@
-[gd_scene load_steps=2 format=3 uid="uid://y3ehe1x4wppv"]
+[gd_scene load_steps=6 format=3 uid="uid://y3ehe1x4wppv"]
 
 [ext_resource type="Script" path="res://components/weapon_systems/hitscan_weapon_system.gd" id="1_5noyw"]
+[ext_resource type="Shader" uid="uid://b2bkuytvqokj3" path="res://components/weapon_systems/shield.tres" id="2_noxkr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p4f6f"]
+render_priority = 0
+shader = ExtResource("2_noxkr")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_qopxk"]
+material = SubResource("ShaderMaterial_p4f6f")
+
+[sub_resource type="Environment" id="Environment_w0aba"]
+glow_enabled = true
+glow_intensity = 4.4
 
 [node name="Hitscan_weapon_system" type="Node"]
 script = ExtResource("1_5noyw")
+
+[node name="bullets_range" type="RayCast3D" parent="."]
+unique_name_in_owner = true
+target_position = Vector3(0, 0, -10)
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_qopxk")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_w0aba")
